@@ -112,6 +112,6 @@ export const getUserById = cache(async (id: string) => {
 //   return updatedUser
 // }
 
-export const getUserById = cache(async (id: string) => {
-  return await prisma.user.findUnique({ where: { id } })
-})
+// export const getUserById = cache(async (id: string) => {
+//   return await prisma.user.findUnique({ where: { id } })
+// })
