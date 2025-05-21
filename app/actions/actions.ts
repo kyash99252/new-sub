@@ -67,7 +67,9 @@ export const getUserById = cache(async (id: string) => {
     return user || null
 })
 
-
+export async function getAllUsers(): Promise<User[]> {
+  return users;
+}
 // 'use server'
 
 // import { prisma } from '@/lib/prisma'
