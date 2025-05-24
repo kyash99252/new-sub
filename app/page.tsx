@@ -15,14 +15,14 @@ export default async function Home({
   if (!session) {
     redirect('/auth/signin');
   }
-
-  // Extract userId as a string if present
   const userId = typeof searchParams?.userId === "string" ? searchParams.userId : undefined;
+
+  const userSearchPromise = Promise.resolve({ userId: userId });
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">User Search</h1>
-      <UserSearch searchParams={{ userId }} />
+      <UserSearch searchParams={userSearchPromise} />
       <UserDialog />
       <TechnicalOverview />
     </div>
