@@ -8,7 +8,7 @@ import UserSearch from "./components/user-search";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { userId?: string };
+  searchParams?: { userId?: string };
 }) {
   const session = await auth();
 
