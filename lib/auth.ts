@@ -20,10 +20,10 @@ export const {
     signIn: '/auth/signin',
   },
   callbacks: {
-    async session({ session, user }) {
+    async session({ session }) {
       return session
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token }) {
       return token
     }
   },
