@@ -13,7 +13,7 @@ export default async function Home({
   const session = await auth(); // ✅ check if user is logged in
 
   if (!session) {
-     redirect('/api/auth/signin') // 🔁 redirect to Google login if not
+    redirect('/auth/signin') // Updated redirect path
   }
 
   return (
