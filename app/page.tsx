@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth"; // 👈 update path if your auth export is in 'auth.ts' or adjust to the correct file
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 import { TechnicalOverview } from "./components/technical-overview";
@@ -8,12 +8,12 @@ import UserSearch from "./components/user-search";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ userId?: string }>;
+  searchParams: { userId?: string };
 }) {
-  const session = await auth(); // ✅ check if user is logged in
+  const session = await auth();
 
   if (!session) {
-    redirect('/auth/signin') // Updated redirect path
+    redirect('/auth/signin');
   }
 
   return (
