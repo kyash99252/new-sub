@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react"
 export default function SignInButton() {
   const handleSignIn = () => {
     signIn("google", {
-      callbackUrl: "/",
+      callbackUrl: "https://new-sub-final-deploy.vercel.app",
       redirect: true,
     })
   }

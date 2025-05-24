@@ -5,6 +5,11 @@ import { auth } from "@/lib/auth"
 export default async function middleware(request: NextRequest) {
   const session = await auth()
 
+  // Allow access to auth-related paths
+  if (request.nextUrl.pathname.startsWith('/api/auth')) {
+    return NextResponse.next()
+  }
+
   // If the user is not signed in and the current path is not /auth/signin,
   // redirect the user to /auth/signin
   if (!session && !request.nextUrl.pathname.startsWith('/auth/signin')) {
@@ -22,5 +27,5 @@ export default async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 } 
