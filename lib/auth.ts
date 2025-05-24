@@ -26,7 +26,5 @@ export const {
     async jwt({ token }) {
       return token
     }
-  },
-  basePath: "/api/auth",
-  baseUrl: process.env.NEXTAUTH_URL || "https://new-sub-final-deploy.vercel.app"
+  }
 })
