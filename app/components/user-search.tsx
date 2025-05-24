@@ -1,13 +1,10 @@
-// app/components/user-search.tsx
 import { getUserById } from '@/app/actions/actions';
 import { Suspense } from 'react';
 import SearchInput from './search-input-cmd'; // Check this path if it's correct
 import UserCard from './user-card';
 
-// CORRECTED: searchParams is a Promise as per Next.js 15.1 / React 19
 export default async function UserSearch({ searchParams }: { searchParams: Promise<{ userId?: string }> }) {
-  // Await the searchParams promise to get the actual object
-  const resolvedSearchParams = await searchParams;
+  const resolvedSearchParams = await searchParams; // This will be { userId?: string } or undefined
   const selectedUserId = resolvedSearchParams?.userId || null;
 
   // Fetch the user based on the selectedUserId
@@ -17,9 +14,14 @@ export default async function UserSearch({ searchParams }: { searchParams: Promi
     <div className="space-y-6">
       <SearchInput />
       {selectedUserId && (
-        <Suspense fallback={<p>Loading user...</p>}>
-          {user ? <UserCard user={user} /> : null}
+        <Suspense fallback={<p>Loading user details...</p>}>
+          {user ? <UserCard user={user} /> : <p>User not found.</p>}
         </Suspense>
+      )}
+      {!selectedUserId && (
+          <p className="text-sm text-muted-foreground">
+              Use the search bar above to find user details by their ID.
+          </p>
       )}
     </div>
   );
