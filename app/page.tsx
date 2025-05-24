@@ -8,7 +8,7 @@ import UserSearch from "./components/user-search";
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { userId?: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const session = await auth();
 
@@ -16,10 +16,13 @@ export default async function Home({
     redirect('/auth/signin');
   }
 
+  // Extract userId as a string if present
+  const userId = typeof searchParams?.userId === "string" ? searchParams.userId : undefined;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">User Search</h1>
-      <UserSearch searchParams={searchParams} />
+      <UserSearch searchParams={{ userId }} />
       <UserDialog />
       <TechnicalOverview />
     </div>
