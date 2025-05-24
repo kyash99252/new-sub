@@ -13,9 +13,7 @@ export default async function Home({
   const session = await auth(); // ✅ check if user is logged in
 
   if (!session) {
-    redirect("https://new-sub-final-deploy.vercel.app/api/auth/signin/google");
-
-    // 🔁 redirect to Google login if not
+     redirect('/api/auth/signin') // 🔁 redirect to Google login if not
   }
 
   return (

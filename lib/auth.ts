@@ -3,7 +3,12 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -11,4 +16,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   secret: process.env.AUTH_SECRET,
+  pages: {
+    signIn: '/auth/signin',
+  },
+  callbacks: {
+    async session({ session, user }) {
+      return session
+    },
+    async jwt({ token, user, account, profile }) {
+      return token
+    }
+  },
+  basePath: "/api/auth",
+  baseUrl: process.env.NEXTAUTH_URL || "https://new-sub-final-deploy.vercel.app"
 })
